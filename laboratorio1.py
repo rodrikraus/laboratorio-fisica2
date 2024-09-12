@@ -48,7 +48,7 @@ plt.title("Líneas de Campo Eléctrico")
 plt.xlabel('x')
 plt.ylabel('y')
 plt.grid()
-plt.show()
+plt.savefig('lineas_campo.png')
 
 # Inicializar el potencial eléctrico total
 V_total = np.zeros_like(X)
@@ -66,7 +66,7 @@ plt.xlabel('x')
 plt.ylabel('y')
 plt.grid()
 plt.colorbar(label="Potencial (V)")
-plt.show()
+plt.savefig('potencial.png')
 
 # Graficar el campo y el potencial eléctrico en un solo gráfico
 plt.figure(figsize=(10, 10))
@@ -77,4 +77,4 @@ plt.xlabel('x')
 plt.ylabel('y')
 plt.grid()
 plt.colorbar(label="Potencial (V)")
-plt.show()
+plt.savefig('campo_potencial.png')
