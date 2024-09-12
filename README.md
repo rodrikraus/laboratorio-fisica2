@@ -2,7 +2,7 @@
 ## Campo Eléctrico y Potencial Eléctrico
 
 ### Cómo ejecutarlo
-Primero hay que activar el entorno virtual de Python
+Primero hay que activar el entorno virtual de Python  
 En Linux:
 ```
 $ source bin/activate
