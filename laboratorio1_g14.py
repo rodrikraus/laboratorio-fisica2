@@ -6,8 +6,7 @@ from matplotlib.patches import Circle
 y_min, y_max = -2, 2
 x_min, x_max = -2, 2
 
-
-# Definir las cargas y sus posiciones
+# Definición de las cargas y sus posiciones
 cargas = [
     {'q': 1e-9, 'xq': 1, 'yq': 1},    # Carga positiva de 1 nC en (1, 1)
     {'q': -1e-9, 'xq': -1, 'yq': 1},  # Carga negativa de -1 nC en (-1, 1)
@@ -33,25 +32,25 @@ def potencial_electrico(q, xq, yq, x, y):
     V = k * q / r
     return V
 
-# Crear una malla de puntos en 2D
+# Creación de una malla de puntos en 2D
 x = np.linspace(y_min, y_max, 100)
 y = np.linspace(y_min, y_max, 100)
 X, Y = np.meshgrid(x, y)
 
-# Inicializar el campo eléctrico total
+# Inicialización del campo eléctrico total (matrices)
 Ex_total = np.zeros_like(X)
 Ey_total = np.zeros_like(Y)
 
-# Inicializar el potencial eléctrico total
+# Inicialización del potencial eléctrico total (matriz)
 V_total = np.zeros_like(X)
 
-# Calcular el campo eléctrico total
+# Cálculo del campo eléctrico total
 for carga in cargas:
     Ex, Ey = campo_electrico(carga['q'], carga['xq'], carga['yq'], X, Y)
     Ex_total += Ex
     Ey_total += Ey
 
-# Calcular el potencial eléctrico total
+# Cálculo del potencial eléctrico total
 for carga in cargas:
     V = potencial_electrico(carga['q'], carga['xq'], carga['yq'], X, Y)
     V_total += V
@@ -70,7 +69,7 @@ colores_carga = {True: '#aa0000', False: '#0000aa'}
 
 for indice, carga in enumerate(cargas):
     pos = carga['xq'], carga['yq']
-    ref = f"q{indice} = {carga['q']} en pos ({carga['xq']}, {carga['yq']})"
+    ref = f"q{indice} = {carga['q']} en pos ({carga['xq']}, {carga['yq']})" # String para las referencias
     plot.add_artist(Circle(pos, 0.05, color=colores_carga[carga['q']>0], label=ref))
 
 # Graficar gráfico: Lineas de campo
