@@ -92,4 +92,4 @@ plt.ylabel('y')
 plt.grid()
 plt.colorbar(label="Potencial (V)")
 
-plt.show()
+plt.savefig('campo_y_potencial.png')
