@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 
 # Extensión del gráfico
-y_min, y_max = -2, 2
-x_min, x_max = -2, 2
+y_min, y_max = -1.5, 1.5
+x_min, x_max = -1.5, 1.5
 
 # Definición de las cargas y sus posiciones
 cargas = [
@@ -56,39 +56,35 @@ for carga in cargas:
     V_total += V
 
 # Generación de gráficos
-plot_base = plt.figure(figsize=(16, 8))
-plot = plot_base.add_subplot(121)
+plot_base = plt.figure(figsize=(10, 10))
+plot = plot_base.add_subplot()
 
-# Generación de líneas de campo con librería Streamplot
+# Graficar: líneas de campo con librería Streamplot
 color = 2 * np.log(np.hypot(Ex, Ey))
 plot.streamplot(x, y, Ex_total, Ey_total, color=color, linewidth=1, cmap=plt.cm.inferno,
               density=1.5, arrowstyle='->', arrowsize=1.5)
 
-# Generación de un punto para cada carga en gráfico de líneas de campo
-colores_carga = {True: '#aa0000', False: '#0000aa'}
-
-for indice, carga in enumerate(cargas):
-    pos = carga['xq'], carga['yq']
-    ref = f"q{indice} = {carga['q']} en pos ({carga['xq']}, {carga['yq']})" # String para las referencias
-    plot.add_artist(Circle(pos, 0.05, color=colores_carga[carga['q']>0], label=ref))
-
-# Graficar gráfico: Lineas de campo
-plot.set_title("Lineas de campo")
+# Graficar: ejes y grilla
 plot.set_xlabel('$x$')
 plot.set_ylabel('$y$')
 plot.set_xlim(y_min,y_max)
 plot.set_ylim(y_min,y_max)
 plot.set_aspect('equal')
 plt.grid()
-plt.legend(loc="upper left")
 
-# Graficar gráfico: Potencial eléctrico
-plt.subplot(122)
-plt.contour(X, Y, V_total, 1200, cmap='viridis')
-plt.title("Contorno del Potencial Eléctrico")
-plt.xlabel('x')
-plt.ylabel('y')
-plt.grid()
+# Graficar: Potencial eléctrico
+plt.contour(X, Y, V_total, 400, cmap='viridis', linewidths=.7)
+
+# Generación de un punto para cada carga en gráfico de líneas de campo
+# (para las referencias)
+for indice, carga in enumerate(cargas):
+    pos = carga['xq'], carga['yq']
+    ref = f"q{indice} = {carga['q']} en pos ({carga['xq']}, {carga['yq']})" # String para las referencias
+    plot.add_artist(Circle(pos, 0.05, label=ref))
+plt.legend(loc="upper left",handlelength=0)
+
+#Títulos y barra de colores de potencial
+plt.title("Campo y potencial eléctrico")
 plt.colorbar(label="Potencial (V)")
 
-plt.savefig('campo_y_potencial.png')
+plt.savefig('campo_y_potencial.png',bbox_inches='tight')
