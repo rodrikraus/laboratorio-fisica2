@@ -10,7 +10,7 @@ $ source bin/activate
 
 Luego instalamos las librerías necesarias con
 ```
-$ pip install -r requeriments.txt
+$ pip install -r requirements.txt
 ```
 
 Ahora si podemos ejecutar el script
